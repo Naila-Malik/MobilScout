@@ -6,8 +6,12 @@ export const Routes = {
   HomeScreen: {
     home: 'homeScreen',
   },
-  AddCarScreen: {
+  AddCarStack: {
+    mainScreen: 'mainScreen',
     addCar: 'addCar',
+    vehicalCard: 'vehicalCard',
+    carInfo: 'carInfo',
+    VehicalDetail: 'VehicalDetail',
   },
   SearchScreen: {
     search: 'search',
