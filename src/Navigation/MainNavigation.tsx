@@ -22,6 +22,10 @@ import Settings from '../Ui/Sections/Settings/Settings';
 import Profile from '../Ui/Sections/Profile/Profile';
 import Icon from '@react-native-vector-icons/ionicons';
 import {Image} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
+import AddVehicalCard from '../Ui/Sections/AddCar/AddVehicalCard';
+import AddCarInfo from '../Ui/Sections/AddCar/AddCarInfo';
+import VehicalDetail from '../Ui/Sections/AddCar/VehicalDetail';
 
 // const MainStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -52,7 +56,7 @@ const AppStack = () => {
                 color={focused ? '#FF6600' : '#A1A1A1'}
               />
             );
-          } else if (route.name === Routes.AddCarScreen.addCar) {
+          } else if (route.name === Routes.AddCarStack.mainScreen) {
             return (
               <Icon
                 name="plus-circle"
@@ -97,8 +101,8 @@ const AppStack = () => {
         options={{tabBarLabel: 'Search'}}
       />
       <Tab.Screen
-        name={Routes.AddCarScreen.addCar}
-        component={AddCarScreen}
+        name={Routes.AddCarStack.mainScreen}
+        component={MyStack}
         options={{tabBarLabel: 'Add Car'}}
       />
       <Tab.Screen
@@ -114,6 +118,26 @@ const AppStack = () => {
     </Tab.Navigator>
   );
 };
+const Stack = createStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName={Routes.AddCarStack.addCar}
+      screenOptions={{headerShown: false}}>
+      <Stack.Screen name={Routes.AddCarStack.addCar} component={AddCarScreen} />
+      <Stack.Screen
+        name={Routes.AddCarStack.vehicalCard}
+        component={AddVehicalCard}
+      />
+      <Stack.Screen name={Routes.AddCarStack.carInfo} component={AddCarInfo} />
+      <Stack.Screen
+        name={Routes.AddCarStack.VehicalDetail}
+        component={VehicalDetail}
+      />
+    </Stack.Navigator>
+  );
+}
 const AppContainer = () => {
   const selector = useSelector((AppState: AppRootStore) => AppState);
   const {safeArea, userData} = selector.AppReducer;
